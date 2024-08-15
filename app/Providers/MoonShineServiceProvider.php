@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Resources\PlayerResource;
+use App\MoonShine\Resources\TeamResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
@@ -49,10 +51,10 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     new MoonShineUserRoleResource()
                 ),
             ]),
-
-            MenuItem::make('Documentation', 'https://moonshine-laravel.com/docs')
-                ->badge(fn() => 'Check')
-                ->blank(),
+           
+            MenuItem::make('Teams', new TeamResource)->icon('heroicons.user-group') ,
+            MenuItem::make('Players', new PlayerResource)->icon('heroicons.user'),
+            
         ];
     }
 
