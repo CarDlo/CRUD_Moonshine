@@ -50,9 +50,9 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     static fn() => __('moonshine::ui.resource.role_title'),
                     new MoonShineUserRoleResource()
                 ),
-            ]),
-           
-            MenuItem::make('Teams', new TeamResource)->icon('heroicons.user-group') ,
+            ])->icon('heroicons.building-storefront'),
+            
+            MenuItem::make('Teams', new TeamResource)->icon('heroicons.user-group'),
             MenuItem::make('Players', new PlayerResource)->icon('heroicons.user'),
             
         ];

@@ -27,7 +27,7 @@ class PlayerResource extends ModelResource
     protected bool $createInModal = true;
     protected bool $editInModal = true;
     protected bool $detailModal = false;
-
+    protected bool $withPolicy = true; 
     public function redirectAfterSave(): string
     {
         $referer = Request::header('referer');

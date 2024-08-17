@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
+use MoonShine\Metrics\DonutChartMetric; 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Team;
 use Illuminate\Support\Facades\Request;
@@ -26,7 +27,7 @@ class TeamResource extends ModelResource
     protected bool $createInModal = true;
     protected bool $editInModal = true;
     protected bool $detailModal = false;
-
+    protected bool $withPolicy = true; 
     public function redirectAfterSave(): string
     {
         $referer = Request::header('referer');
@@ -44,6 +45,8 @@ class TeamResource extends ModelResource
                 Text::make('Country', 'country'),
                 
             ]),
+            
+
         ];
     }
 
@@ -56,5 +59,12 @@ class TeamResource extends ModelResource
     public function rules(Model $item): array
     {
         return [];
+    }
+    public function metrics(): array{
+
+        return [
+            DonutChartMetric::make('Subscribers') 
+            ->values(['CutCode' => 10000, 'Apple' => 9999]) 
+        ];
     }
 }

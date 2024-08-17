@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages;
 
+use MoonShine\Metrics\DonutChartMetric; 
+use App\Models\Player;
+use App\Models\Team;
 use MoonShine\Pages\Page;
 use MoonShine\Components\MoonShineComponent;
+use MoonShine\Decorations\Grid;
+use MoonShine\Metrics\ValueMetric;
 
 class Dashboard extends Page
 {
@@ -29,6 +34,18 @@ class Dashboard extends Page
      */
     public function components(): array
 	{
-		return [];
+        $totalPlayers = Player::count();
+        $totalTeams = Team::count();
+		return [
+            Grid::make([
+                ValueMetric::make('Cantidad de jugadores')->value($totalPlayers)->icon('heroicons.user')->columnSpan(3),
+                ValueMetric::make('Total de Equipos')->value($totalTeams)->icon('heroicons.user-group')->columnSpan(3),
+                ValueMetric::make('Cantidad de jugadores')->value($totalPlayers)->icon('heroicons.user')->columnSpan(3),
+                ValueMetric::make('Total de Equipos')->value($totalTeams)->icon('heroicons.user-group')->columnSpan(3),
+            ]),
+            DonutChartMetric::make('Subscribers') 
+            ->values(['CutCode' => 10000, 'Apple' => 9999]) 
+
+        ];
 	}
 }
